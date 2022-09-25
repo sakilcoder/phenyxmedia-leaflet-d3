@@ -62,7 +62,7 @@ function onEachMarker(feature, layer) {
 }
 
 var getIcon = function (type) {
-    gi = '<i class="fas fa-shopping-bag g-circle" style="font-size:14px; color: #0099ff"></i>';
+    gi = '<i class="fa fa-shopping-bag g-circle" style="font-size:14px; color: #0099ff"></i>';
     // gi = '<i class="fas fa-shopping-bag" style="font-size:14px; color: #0099ff"></i>';
     // gi = '<i class="fas fa-shopping-cart" style="font-size:14px; color: #0099ff"></i>';
     var icon1 = GoogleIcon('<span class="g-icon">' + gi + '</span>');
