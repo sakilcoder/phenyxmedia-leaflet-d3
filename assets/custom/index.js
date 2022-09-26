@@ -5,15 +5,14 @@ const fetchText = async (url) => {
 }
 const csvUrl = 'assets/data/locs.csv';
 
-let travers = 0;
 // --------------------------------------------------------------------
 
+var countyLayer;
 
 var aoiLayer = L.geoJSON(states, {
     style: styleAoi,
     onEachFeature: onEachAoi,
 });
-
 
 var markers = L.layerGroup();
 
@@ -74,5 +73,8 @@ var layerControl = L.control.layers(baseLayers, overlays).addTo(map);
 
 L.easyButton('fa-home fa-lg', function () {
     map.fitBounds(aoiLayer.getBounds());
+    if(countyLayer){
+        map.removeLayer(countyLayer);
+    }
 }).addTo(map);
 

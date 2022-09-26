@@ -16,7 +16,15 @@ function onEachArea(feature, layer) {
 function onEachAoi(feature, layer) {
 
     layer.on('click', function (e) {
-        console.log(e);
+        if(countyLayer){
+            map.removeLayer(countyLayer);
+        }
+        let scounty = filterCounty(e.target.feature.properties.name);
+        countyLayer = L.geoJSON(scounty, {
+            style: styleCounty,
+            // onEachFeature: onEachAoi,
+        }).addTo(map);
+        map.fitBounds(countyLayer.getBounds());
     });
 
     layer.on('mouseover', function (e) {
@@ -26,7 +34,6 @@ function onEachAoi(feature, layer) {
     });
 
     layer.on('mouseout', function (e) {
-        // console.log('out-aoi');
         this.setStyle({
             'fillColor': '#719b6b'
         });
@@ -59,6 +66,12 @@ function onEachMarker(feature, layer) {
         e.target.closePopup();
     });
 
+}
+
+var filterCounty = function(state_name){
+    return _.filter(counties.features, function (county) {
+        return [state_name].indexOf(county.properties.STATE_NAME) !== -1; // -1 means not present
+    });
 }
 
 var getIcon = function (type) {

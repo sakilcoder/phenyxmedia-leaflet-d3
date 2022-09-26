@@ -13,6 +13,13 @@ var styleAoi = {
     fillColor: "#719b6b",
     fillOpacity: 0
 }
+var styleCounty = {
+    weight: 1,
+    color: "#2A3E56",
+    opacity: .1,
+    fillColor: "#719b6b",
+    fillOpacity: 0
+}
 
 let GoogleIcon = function (html) {
     return L.divIcon({
