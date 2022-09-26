@@ -39,8 +39,8 @@ body {
     z-index: 50;
 }
 .popupCustom .leaflet-popup-content-wrapper {
-    background: #FDF6EC;
-    color: #180A0A;
+    background: #2A3E56;
+    color: #fff;
     font-size: 14px;
     line-height: 24px;
     border-radius: 0px;
