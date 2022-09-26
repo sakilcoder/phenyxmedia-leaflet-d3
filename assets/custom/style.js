@@ -31,7 +31,7 @@ let GoogleIcon = function (html) {
 
 let pngIconStyle = L.Icon.extend({
     options: {
-       iconSize: [16, 25]
+       iconSize: [10, 19]
     }
 });
 
@@ -40,3 +40,4 @@ let pngIcon = function (url) {
         iconUrl: url
     })
 }
+

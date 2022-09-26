@@ -42,16 +42,16 @@ function onEachAoi(feature, layer) {
 }
 function onEachMarker(feature, layer) {
 
-    var icon = getIcon();
-    layer.setIcon(icon);
+    const iconUrl = 'assets/icon/logo16x.png';
+    layer.setIcon(pngIcon(iconUrl));
 
     var popup = L.popup();
     let str_popup = '';
-    str_popup += '<h5 class="text-center" style="font-weight: bold">'+ feature.properties.name +'</h5>';
+    str_popup += '<h5 class="text-center" style="font-weight: bold">Spectra of '+ feature.properties.name +'</h5>';
     str_popup += '<table style="width: 100%">';
-    str_popup += '<tr><td class="text-center">Phone: +' + feature.properties.phone + '</td></tr>';
+    str_popup += '<tr><td class="text-center">Phone: ' + feature.properties.phone + '</td></tr>';
     str_popup += '<tr><td class="text-center"></td></tr>';
-    str_popup += '<tr><td class="text-center">' + feature.properties.address + '</td></tr>';
+    str_popup += '<tr><td class="text-center">' + feature.properties.city + ', ' + feature.properties.state + ', ' + feature.properties.zip + '</td></tr>';
     str_popup += '</table>';
 
     popup.setContent(str_popup);
@@ -64,6 +64,12 @@ function onEachMarker(feature, layer) {
 
     layer.on('mouseout', function (e) {
         e.target.closePopup();
+    });
+
+    layer.on('click', function (e) {
+        
+        let urlCity = e.target.feature.properties.url;
+        window.location.href = "https://www.spectrametalsleads.com/locations/" + urlCity;
     });
 
 }

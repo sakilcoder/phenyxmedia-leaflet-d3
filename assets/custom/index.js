@@ -29,7 +29,6 @@ var baseLayers = {
     'Street': Esri_WorldStreetMap,
 };
 
-
 var marker_geojson = { "type": "FeatureCollection" }
 
 fetchText(csvUrl).then(text => {
@@ -47,29 +46,42 @@ fetchText(csvUrl).then(text => {
                 "id": pois[i].sl                ,
                 "name": pois[i].name,
                 "address": pois[i].address,
-                "phone": pois[i].phone
+                "phone": pois[i].phone,
+                "url": pois[i].url,
+                "zip": pois[i].zip,
+                "city": pois[i].city,
+                "state": pois[i].state
             },
             "geometry": { "type": "Point", "coordinates": [parseFloat(latlng[1]), parseFloat(latlng[0])] }
         };
         features.push(feature);
+
+        var popup = L.popup();
+        let str_popup = '';
+        str_popup += '<h5 class="text-center" style="font-weight: bold">'+ pois[i].name +'</h5>';
+        str_popup += '<table style="width: 100%">';
+        str_popup += '<tr><td class="text-center">Phone: +' + pois[i].phone + '</td></tr>';
+        str_popup += '<tr><td class="text-center"></td></tr>';
+        str_popup += '<tr><td class="text-center">' + pois[i].address + '</td></tr>';
+        str_popup += '</table>';
+
+        popup.setContent(str_popup);
     }
     marker_geojson.features = features;
 
-    // console.log(marker_geojson);
-
     L.geoJSON(marker_geojson, {
-        style: styleAoi,
+        // style: styleAoi,
         onEachFeature: onEachMarker,
     }).addTo(markers);
 
 });
 
-var overlays = {
-    'States': aoiLayer,
-    'Locations': markers
-};
+// var overlays = {
+//     'States': aoiLayer,
+//     'Locations': markers
+// };
 
-var layerControl = L.control.layers(baseLayers, overlays).addTo(map);
+var layerControl = L.control.layers(baseLayers).addTo(map);
 
 L.easyButton('fa-home fa-lg', function () {
     map.fitBounds(aoiLayer.getBounds());
